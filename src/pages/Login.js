@@ -37,7 +37,6 @@ class Login extends React.Component {
 
   render() {
     const { email, senha } = this.state;
-    const { dispatch } = this.props;
     return (
       <form onSubmit={ this.handleSubmit }>
         <input
@@ -57,7 +56,6 @@ class Login extends React.Component {
         <button
           type="submit"
           disabled={ !this.enableBtn() }
-          onClick={ () => dispatch(addEmailAndPassword(emailInput)) }
         >
           Entrar
         </button>
