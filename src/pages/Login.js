@@ -31,7 +31,7 @@ class Login extends React.Component {
     event.preventDefault();
     const { email } = this.state;
     const { dispatch, history } = this.props;
-    dispatch(saveUserEmail(email));
+    dispatch(saveUserEmail({ email }));
     history.push('/carteira');
   };
 
