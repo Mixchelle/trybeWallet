@@ -30,7 +30,7 @@ Header.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  ...state.user.email,
+  ...state.user,
 });
 
 export default connect(mapStateToProps)(Header);
