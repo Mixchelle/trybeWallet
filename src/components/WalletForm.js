@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchAPI, fetchExchangeRate } from '../redux/actions';
+import { fetchAPI, fetchExchange } from '../redux/actions';
 
 class WalletForm extends Component {
   state = {
-    value: 0,
+    id: 0,
+    value: 1,
     description: '',
     currency: '',
     method: '',
@@ -24,13 +25,18 @@ class WalletForm extends Component {
     });
   };
 
-  handleClick = async () => {
+  handleClick = (event) => {
+    event.preventDefault();
     const { dispatch } = this.props;
-    dispatch(editor ? saveEditedExpense(this.state) : fetchExchangeRate(this.state));
-    this.setState({
+    dispatch(fetchExchange(this.state));
+    this.setState((prevState) => ({
+      id: prevState.id + 1,
       value: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
       description: '',
-    });
+    }));
   };
 
   render() {
@@ -45,6 +51,8 @@ class WalletForm extends Component {
             placeholder="Valor"
             data-testid="value-input"
             type="number"
+            name="value"
+            id="value"
             onChange={ this.handleChange }
             value={ value }
           />
