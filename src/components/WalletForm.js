@@ -134,7 +134,7 @@ class WalletForm extends Component {
           type="button"
           data-testid="button"
         >
-            Adicionar despesa
+          Adicionar despesa
         </button>
       </form>
     );
