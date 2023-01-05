@@ -43,8 +43,14 @@ class WalletForm extends Component {
   };
 
   handleClick = async () => {
-    const { dispatch, editor } = this.props;
-    dispatch(editor ? saveEditedExpense(this.state) : fetchExchange(this.state));
+    const { dispatch} = this.props;
+    dispatch(fetchExchange(this.state));
+    this.setState((prevState) => ({
+      id: prevState.id + 1,
+    }), () => {
+      const { id } = this.state;
+      console.log(id);
+    });
     this.setState({
       value: '',
       description: '',
@@ -56,8 +62,8 @@ class WalletForm extends Component {
 
   render() {
     const { currencies } = this.props;
-    const { value, description, currency, method, tag } = this.state;
-    console.log({ value });
+    const { value, description, currency, method, tag, id } = this.state;
+    console.log({ value, id });
     return (
       <form>
         <label htmlFor="value">
@@ -128,7 +134,7 @@ class WalletForm extends Component {
           type="button"
           data-testid="button"
         >
-          Adicionar despesa
+            Adicionar despesa
         </button>
       </form>
     );
@@ -144,7 +150,8 @@ WalletForm.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  ...state.wallet,
+  currencies: state.wallet.currencies,
+  expenses: state.wallet.expenses,
 });
 
 export default connect(mapStateToProps)(WalletForm);

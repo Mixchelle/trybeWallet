@@ -8,15 +8,26 @@ class Table extends Component {
     const { dispatch, expenses } = this.props;
     const deleteExpense = expenses.filter((e) => e.id !== id);
     dispatch(deleteItem(deleteExpense));
+    console.log({ expenses }, 'remove');
+  };
+
+  editItem = (id) => {
+    const { dispatch, expenses } = this.props;
+    dispatch(editExpense(id));
+    console.log({ expenses },'edita');
   };
 
   render() {
-    const { expenses, dispatch } = this.props;
+    const { expenses } = this.props;
     return (
       <div>
         <table>
           <thead>
-            <tr className="tableHeader">
+            <tr
+              className="tableHeader"
+              sx={ { minWidth: 650 } }
+              aria-label="simple table"
+            >
               <th>Descrição</th>
               <th>Tag</th>
               <th>Método de pagamento</th>
@@ -66,11 +77,10 @@ class Table extends Component {
                   <button
                     type="button"
                     data-testid="edit-btn"
-                    onClick={ () => dispatch(editExpense(expense)) }
+                    onClick={ () => this.editItem(id)  }
                   >
                     Editar despesa
                   </button>
-
                   <button
                     data-testid="delete-btn"
                     type="button"
@@ -102,9 +112,8 @@ Table.propTypes = {
   })).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  expenses: state.wallet.expenses,
-  editor: state.wallet.editor,
+const mapStateToProps = ({ wallet: { expenses } }) => ({
+  expenses,
 });
 
 export default connect(mapStateToProps)(Table);
