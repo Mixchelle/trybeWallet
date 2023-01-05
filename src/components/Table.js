@@ -46,24 +46,24 @@ class Table extends Component {
                 key={ id }
                 sx={ { '&:last-child td, &:last-child th': { border: 0 } } }
               >
-                <th>
+                <td>
                   {expense.description}
-                </th>
-                <th>{expense.tag}</th>
-                <th>{expense.method}</th>
+                </td>
+                <td>{expense.tag}</td>
+                <td>{expense.method}</td>
                 <td>{parseFloat(expense.value).toFixed(2)}</td>
-                <th>
+                <td>
                   {expense.exchangeRates[expense.currency]?.name}
-                </th>
-                <th>
+                </td>
+                <td>
                   {
                     new Intl
                       .NumberFormat('en-US', { style: 'currency', currency: 'BRL' })
                       .format(expense.exchangeRates[expense.currency]?.ask)
                   }
 
-                </th>
-                <th>
+                </td>
+                <td>
                   {
                     new Intl
                       .NumberFormat('en-US', { style: 'currency', currency: 'BRL' })
@@ -71,9 +71,9 @@ class Table extends Component {
                       * Number(expense.exchangeRates[expense.currency]?.ask))
                   }
 
-                </th>
-                <th>Real Brasileiro</th>
-                <th>
+                </td>
+                <td>Real Brasileiro</td>
+                <td>
                   <button
                     type="button"
                     data-testid="edit-btn"
@@ -89,7 +89,7 @@ class Table extends Component {
                   >
                     Excluir
                   </button>
-                </th>
+                </td>
               </tr>
             ))}
           </tbody>
