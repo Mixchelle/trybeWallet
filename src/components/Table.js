@@ -4,38 +4,43 @@ import { connect } from 'react-redux';
 import { deleteItem, editExpense } from '../redux/actions/index';
 
 class Table extends Component {
-  bttDeleteIten = (id) => {
-    const { expenses, dispatch } = this.props;
-    const idExcluir = expenses.filter((expense) => expense.id !== id);
-    dispatch(deleteItem(idExcluir));
+  removeItem = (id) => {
+    const { dispatch, expenses } = this.props;
+    const deleteExpense = expenses.filter((e) => e.id !== id);
+    dispatch(deleteItem(deleteExpense));
   };
 
   render() {
-    const { expenses } = this.props;
+    const { expenses, dispatch } = this.props;
     return (
       <div>
         <table>
-          <tr className="tableHeader">
-            <th>Descrição</th>
-            <th>Tag</th>
-            <th>Método de pagamento</th>
-            <th>Valor</th>
-            <th>Moeda</th>
-            <th>Câmbio utilizado</th>
-            <th>Valor convertido</th>
-            <th>Moeda de conversão</th>
-            <th>Editar/Excluir</th>
-          </tr>
+          <thead>
+            <tr className="tableHeader">
+              <th>Descrição</th>
+              <th>Tag</th>
+              <th>Método de pagamento</th>
+              <th>Valor</th>
+              <th>Moeda</th>
+              <th>Câmbio utilizado</th>
+              <th>Valor convertido</th>
+              <th>Moeda de conversão</th>
+              <th>Editar/Excluir</th>
+            </tr>
+          </thead>
           <tbody>
             {expenses.length
-            && expenses.map((expense) => (
-              <tr key={ expense.id }>
+            && expenses.map((expense, id) => (
+              <tr
+                key={ id }
+                sx={ { '&:last-child td, &:last-child th': { border: 0 } } }
+              >
                 <th>
                   {expense.description}
                 </th>
                 <th>{expense.tag}</th>
                 <th>{expense.method}</th>
-                <th>{Number(expense.value).toFixed(2)}</th>
+                <td>{parseFloat(expense.value).toFixed(2)}</td>
                 <th>
                   {expense.exchangeRates[expense.currency]?.name}
                 </th>
@@ -70,7 +75,7 @@ class Table extends Component {
                     data-testid="delete-btn"
                     type="button"
                     id="Excluir"
-                    onClick={ () => this.bttDeleteIten(expense.id) }
+                    onClick={ () => this.removeItem(expenses.id) }
                   >
                     Excluir
                   </button>
@@ -96,8 +101,10 @@ Table.propTypes = {
     exchangesRates: PropTypes.shape({}),
   })).isRequired,
 };
+
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
+  editor: state.wallet.editor,
 });
 
 export default connect(mapStateToProps)(Table);

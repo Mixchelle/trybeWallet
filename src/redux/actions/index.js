@@ -28,16 +28,16 @@ export const deleteItem = (expenses) => ({
 });
 
 export const updateTotalExpenses = () => ({
-  type: 'UPDATE_TOTAL_EXPENSES' });
+  type: 'UPDATE_TOTAL_EXPENSES'});
 
-export const saveEditedExpense = (editedExpense) => ({
+export const saveEditedExpense = (expense) => ({
   type: SAVE_EDITED_EXPENSE,
-  payload: editedExpense,
+  payload: expense,
 });
 
-export const editExpense = (expense) => ({
+export const editExpense = (id) => ({
   type: EDIT_EXPENSE,
-  payload: expense,
+  payload: id,
 });
 
 export const fetchAPI = () => async (dispatch) => {

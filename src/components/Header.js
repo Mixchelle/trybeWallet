@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 class Header extends Component {
   render() {
     const { email, expenses } = this.props;
-    console.log({ email, expenses });
+    console.log({ email, expenses }, 'OI');
     const totalExpense = expenses
       .reduce((acc, currValue) => (acc + Number(currValue.value)
   * Number(currValue.exchangeRates[currValue.currency]?.ask)), 0).toFixed(2);
@@ -13,10 +13,13 @@ class Header extends Component {
     return (
       <header>
         <h3 data-testid="email-field">{ email }</h3>
-        <h3 data-testid="total-field">
+        <h2>
           Despesa total:
-          { totalExpense }
-        </h3>
+          R$
+          <h3 data-testid="total-field">
+            { totalExpense }
+          </h3>
+        </h2>
         <h3 data-testid="header-currency-field">
           Câmbio:
           { cambio }

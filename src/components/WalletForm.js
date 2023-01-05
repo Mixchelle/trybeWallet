@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchAPI, fetchExchange } from '../redux/actions';
+import { fetchAPI, fetchExchange, saveEditedExpense } from '../redux/actions';
 
 class WalletForm extends Component {
   state = {
     id: 0,
-    value: 1,
+    value: '',
     description: '',
-    currency: '',
+    currency: 'USD',
     method: '',
     tag: '',
   };
@@ -18,6 +18,23 @@ class WalletForm extends Component {
     dispatch(fetchAPI());
   }
 
+  componentDidUpdate(prevProps) {
+    const { idEdit: prevIdEdit, editor: prevEditor } = prevProps;
+    const { idEdit, editor, expenses } = this.props;
+
+    if (idEdit !== prevIdEdit || editor !== prevEditor) {
+      const expenseToEdit = expenses.find((expense) => expense.id === idEdit);
+      if (expenseToEdit) {
+        this.setState({
+          value: expenseToEdit.value,
+          description: expenseToEdit.description,
+          currency: expenseToEdit.currency,
+          method: expenseToEdit.method,
+          tag: expenseToEdit.tag });
+      }
+    }
+  }
+
   handleChange = ({ target }) => {
     const { name, value } = target;
     this.setState({
@@ -25,18 +42,16 @@ class WalletForm extends Component {
     });
   };
 
-  handleClick = (event) => {
-    event.preventDefault();
-    const { dispatch } = this.props;
-    dispatch(fetchExchange(this.state));
-    this.setState((prevState) => ({
-      id: prevState.id + 1,
+  handleClick = async () => {
+    const { dispatch, editor } = this.props;
+    dispatch(editor ? saveEditedExpense(this.state) : fetchExchange(this.state));
+    this.setState({
       value: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
       description: '',
-    }));
+      currency: 'USD',
+      method: '',
+      tag: '',
+    });
   };
 
   render() {
@@ -98,7 +113,7 @@ class WalletForm extends Component {
           <select
             data-testid="tag-input"
             name="tag"
-            defaultValue={ tag }
+            value={ tag }
             onChange={ this.handleChange }
           >
             <option value="Alimentação">Alimentação</option>
@@ -109,10 +124,11 @@ class WalletForm extends Component {
           </select>
         </label>
         <button
-          type="button"
           onClick={ this.handleClick }
+          type="button"
+          data-testid="button"
         >
-          Adicionar Despesa
+          Adicionar despesa
         </button>
       </form>
     );
@@ -121,6 +137,9 @@ class WalletForm extends Component {
 
 WalletForm.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.string).isRequired,
+  idEdit: PropTypes.number.isRequired,
+  editor: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 
