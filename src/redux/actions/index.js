@@ -28,7 +28,7 @@ export const deleteItem = (expenses) => ({
 });
 
 export const updateTotalExpenses = () => ({
-  type: 'UPDATE_TOTAL_EXPENSES'});
+  type: 'UPDATE_TOTAL_EXPENSES' });
 
 export const saveEditedExpense = (expense) => ({
   type: SAVE_EDITED_EXPENSE,
