@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchAPI, fetchExchange, saveEditedExpense } from '../redux/actions';
+import { fetchAPI, fetchExchange } from '../redux/actions';
 
 class WalletForm extends Component {
   state = {
@@ -43,7 +43,7 @@ class WalletForm extends Component {
   };
 
   handleClick = async () => {
-    const { dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(fetchExchange(this.state));
     this.setState((prevState) => ({
       id: prevState.id + 1,
