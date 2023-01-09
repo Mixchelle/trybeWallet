@@ -5,7 +5,6 @@ import Wallet from '../pages/Wallet';
 import Login from '../pages/Login';
 import { renderWithRouterAndRedux, renderWithRedux } from './helpers/renderWith';
 
-
 describe('Testa o component Login', () => {
   test('se renderiza os elementos corretos', () => {
     renderWithRedux(<Login />);
