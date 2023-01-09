@@ -3,7 +3,7 @@ import mockData from './helpers/mockData';
 import { renderWithRedux } from './helpers/renderWith';
 
 describe('Testa as funções ', () => {
-  it('', async () => {
+  test('testa as funçoes da API', async () => {
     jest.spyOn(global, 'fetch');
     global.fetch.mockResolvedValue({
       json: jest.fn().mockResolvedValue(mockData),
