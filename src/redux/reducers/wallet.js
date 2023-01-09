@@ -3,15 +3,16 @@ import {
   SAVE_CURRENCIES,
   SAVE_EXPENSES,
   DELETE_EXPENSES,
-  EDIT_EXPENSE,
   SAVE_EDITED_EXPENSE,
+  EDIT_EXPENSE,
+
 } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
+  idToEdit: 0,
   editor: false,
-  idEdit: 0,
 };
 
 const wallet = (state = INITIAL_STATE, action) => {
@@ -34,23 +35,24 @@ const wallet = (state = INITIAL_STATE, action) => {
           },
         ],
     };
-  case DELETE_EXPENSES:
+  case DELETE_EXPENSES: {
     return {
       ...state,
-      expenses: state.expenses.filter((expense) => (expense.id !== action.payload.id)),
+      expenses: action.payload,
     };
+  }
   case EDIT_EXPENSE:
     return {
       ...state,
       editor: true,
-      idEdit: action.payload.id,
+      idToEdit: action.payload.id,
     };
   case SAVE_EDITED_EXPENSE:
     return {
       ...state,
       expenses: state.expenses
         .map((expense) => (
-          state.idEdit === expense.id ? { ...expense, ...action.payload } : expense)),
+          state.idToEdit === expense.id ? { ...expense, ...action.payload } : expense)),
       editor: false,
     };
   default:

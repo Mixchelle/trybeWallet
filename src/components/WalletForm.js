@@ -19,11 +19,10 @@ class WalletForm extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { idEdit: prevIdEdit, editor: prevEditor } = prevProps;
-    const { idEdit, editor, expenses } = this.props;
-
-    if (idEdit !== prevIdEdit || editor !== prevEditor) {
-      const expenseToEdit = expenses.find((expense) => expense.id === idEdit);
+    const { idToEdit: prevIdToEdit, editor: prevEditor } = prevProps;
+    const { idToEdit, editor, expenses } = this.props;
+    if (idToEdit !== prevIdToEdit || editor !== prevEditor) {
+      const expenseToEdit = expenses.find((expense) => expense.id === idToEdit);
       if (expenseToEdit) {
         this.setState({
           value: expenseToEdit.value,
@@ -143,15 +142,21 @@ class WalletForm extends Component {
 
 WalletForm.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-  expenses: PropTypes.arrayOf(PropTypes.string).isRequired,
-  idEdit: PropTypes.number.isRequired,
+  idToEdit: PropTypes.number.isRequired,
   editor: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    value: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    currency: PropTypes.string.isRequired,
+    method: PropTypes.string.isRequired,
+    tag: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  currencies: state.wallet.currencies,
-  expenses: state.wallet.expenses,
+  ...state.wallet,
 });
 
 export default connect(mapStateToProps)(WalletForm);

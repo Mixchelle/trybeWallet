@@ -10,12 +10,12 @@ class Login extends React.Component {
     senha: '',
   };
 
-  handleChange = ({ target }) => {
-    this.setState({ email: target.value });
-  };
-
   handleChangeSenha = ({ target }) => {
     this.setState({ senha: target.value });
+  };
+
+  handleChange = ({ target }) => {
+    this.setState({ email: target.value });
   };
 
   enableBtn = () => {
@@ -54,6 +54,7 @@ class Login extends React.Component {
           onChange={ this.handleChangeSenha }
         />
         <button
+          data-testid="btn-entrar"
           type="submit"
           disabled={ !this.enableBtn() }
         >

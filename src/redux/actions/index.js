@@ -40,6 +40,12 @@ export const editExpense = (id) => ({
   payload: id,
 });
 
+export const fetchExchange = (expense) => async (dispatch) => {
+  const response = await fetch('https://economia.awesomeapi.com.br/json/all');
+  const data = await response.json();
+  dispatch(loadExpenses(expense, data));
+};
+
 export const fetchAPI = () => async (dispatch) => {
   const request = await fetch('https://economia.awesomeapi.com.br/json/all');
   const response = await request.json();
@@ -47,10 +53,4 @@ export const fetchAPI = () => async (dispatch) => {
   const index = currenciesArray.indexOf('USDT');
   currenciesArray.splice(index, 1);
   dispatch(saveCurrencies(currenciesArray));
-};
-
-export const fetchExchange = (expense) => async (dispatch) => {
-  const response = await fetch('https://economia.awesomeapi.com.br/json/all');
-  const data = await response.json();
-  dispatch(loadExpenses(expense, data));
 };

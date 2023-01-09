@@ -23,11 +23,7 @@ class Table extends Component {
       <div>
         <table>
           <thead>
-            <tr
-              className="tableHeader"
-              sx={ { minWidth: 650 } }
-              aria-label="simple table"
-            >
+            <tr className="tableHeader">
               <th>Descrição</th>
               <th>Tag</th>
               <th>Método de pagamento</th>
@@ -41,20 +37,13 @@ class Table extends Component {
           </thead>
           <tbody>
             {expenses.length
-            && expenses.map((expense, id) => (
-              <tr
-                key={ id }
-                sx={ { '&:last-child td, &:last-child th': { border: 0 } } }
-              >
-                <td>
-                  {expense.description}
-                </td>
+            && expenses.map((expense) => (
+              <tr key={ expense.id }>
+                <td>{expense.description}</td>
                 <td>{expense.tag}</td>
                 <td>{expense.method}</td>
                 <td>{parseFloat(expense.value).toFixed(2)}</td>
-                <td>
-                  {expense.exchangeRates[expense.currency]?.name}
-                </td>
+                <td>{expense.exchangeRates[expense.currency]?.name}</td>
                 <td>
                   {
                     new Intl
@@ -77,7 +66,7 @@ class Table extends Component {
                   <button
                     type="button"
                     data-testid="edit-btn"
-                    onClick={ () => this.editItem(id) }
+                    onClick={ () => this.editItem(expense.id) }
                   >
                     Editar despesa
                   </button>
@@ -85,7 +74,7 @@ class Table extends Component {
                     data-testid="delete-btn"
                     type="button"
                     id="Excluir"
-                    onClick={ () => this.removeItem(expenses.id) }
+                    onClick={ () => this.removeItem(expense.id) }
                   >
                     Excluir
                   </button>
