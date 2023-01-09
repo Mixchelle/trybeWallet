@@ -4,17 +4,16 @@ import { connect } from 'react-redux';
 import { deleteItem, editExpense } from '../redux/actions/index';
 
 class Table extends Component {
-  removeItem = (id) => {
-    const { dispatch, expenses } = this.props;
-    const deleteExpense = expenses.filter((e) => e.id !== id);
-    dispatch(deleteItem(deleteExpense));
-    console.log({ expenses }, 'remove');
-  };
-
   editItem = (id) => {
     const { dispatch, expenses } = this.props;
     dispatch(editExpense(id));
     console.log({ expenses }, 'edita');
+  };
+
+  removeItem = (id) => {
+    const { dispatch, expenses } = this.props;
+    const deleteExpense = expenses.filter((e) => e.id !== id);
+    dispatch(deleteItem(deleteExpense));
   };
 
   render() {

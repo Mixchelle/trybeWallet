@@ -27,6 +27,14 @@ export const deleteItem = (expenses) => ({
   payload: expenses,
 });
 
+export function saveExpenses(expense, prices) {
+  return {
+    type: SAVE_EXPENSES,
+    payload: expense,
+    prices,
+  };
+}
+
 export const updateTotalExpenses = () => ({
   type: 'UPDATE_TOTAL_EXPENSES' });
 

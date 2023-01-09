@@ -58,6 +58,30 @@ describe('Testa o component Login', () => {
     const { location: { pathname } } = history;
     expect(pathname).toBe('/carteira');
   });
+
+  test('Testa se o email do user fica salvo no estado global', () => {
+    const testEmail = 'alguem@alguem.com';
+    const testPassword = '1234567m';
+
+    const initialState = {
+      user: {
+        email: testEmail,
+      },
+    };
+
+    const { store } = renderWithRouterAndRedux(<App />, { initialEntries: ['/'], initialState });
+
+    const email = screen.getByText(/email:/i);
+    const senha = screen.getByText(/senha:/i);
+    const button = screen.getByRole('button', {
+      name: /entrar/i,
+    });
+
+    userEvent.type(email, testEmail);
+    userEvent.type(senha, testPassword);
+    userEvent.click(button);
+    expect(store.getState().user.email).toBe(testEmail);
+  });
 });
 
 describe('Testa o component wallet', () => {
