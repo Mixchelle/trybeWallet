@@ -1,0 +1,106 @@
+/* login.css */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+body {
+  background: linear-gradient(90deg, #ff98cc, #00ff80);
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+}
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.card {
+  border: 1px solid #ddd;
+  margin-top: 100px;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background: linear-gradient(90deg, #ff98cc, #00ff80);
+  padding: 10px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 200%;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+button[type="submit"],
+button[type="button"] {
+  width: 100%;
+  padding: 8px;
+  background-color: #e3dbdb;
+  border: none;
+  color: #333;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover,
+button[type="button"]:hover {
+  background-color: #eee;
+}
+
+button[type="submit"]:disabled,
+button[type="button"]:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48%;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+}
+
+.google-button {
+  background-color: #fff;
+}
+
+.facebook-button {
+  background-color: #fff;
+}
+
+.google-button:hover,
+.facebook-button:hover {
+  background-color: #eee;
+}
+
+.google-icon,
+.facebook-icon {
+  margin-right: 5px;
+}

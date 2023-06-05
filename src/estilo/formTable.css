@@ -1,0 +1,27 @@
+.form-inline {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: auto;
+  margin-right: auto;
+  align-items: center;
+  text-align: center;
+}
+
+.form-group {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.form-label {
+  margin-right: 5px;
+}
+
+.form-control,
+.form-select {
+  width: 100%;
+}

@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
+* {
+  box-sizing: border-box;
+  font-family: Raleway, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  width: 100%;
+  background-color: rgba(0, 7, 0, 0.5); /* Verde escuro com transparência de 50% */
+
+  color: white;
+  padding: 20px;
+}
+
+.header-itens {
+  align-items: center;
+  color: white;
+  display: flex;
+  font-weight: 700;
+  justify-content: space-between;
+}
+
+.header-logo {
+  display: flex;
+}
+
+.header-icon {
+  font-size: 1.5em;
+  padding: 5px;
+}
+
+.div_header_icones {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.header-item-email {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.header-item-despesa {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}

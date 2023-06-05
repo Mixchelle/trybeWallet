@@ -1,0 +1,33 @@
+/* CSS */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(242, 242, 242, 0.5); /* Branco com transparência de 50% */
+}
+
+.tableHeader {
+  background-color: rgba(0, 0, 0, 0.5); /* Preto com transparência de 50% */
+}
+
+button {
+  margin-right: 5px;
+}
+
+.button-group {
+  display: flex;
+}
+
+.button-group button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+}
